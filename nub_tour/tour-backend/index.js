@@ -15,7 +15,7 @@ app.use('/reservation',ReservationRouter);
 
 
 app.get('/',(req,res)=>{
-    res.json("Hello From Backend...");
+    res.json("Hi From Backend...");
 });
 
 db.sequelize.sync().then(() => {
