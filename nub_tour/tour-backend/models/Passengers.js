@@ -10,6 +10,10 @@ module.exports = (Sequelize, DataTypes) =>{
             type:DataTypes.STRING,
             allowNull:false,
         },
+        category:{
+            type:DataTypes.STRING,
+            allowNull:false,
+        },
         nub_id:{
             type:DataTypes.STRING,
             allowNull:true,
@@ -26,17 +30,21 @@ module.exports = (Sequelize, DataTypes) =>{
             type:DataTypes.STRING,
             allowNull:true,
         },
+        amount:{
+            type:DataTypes.INTEGER,
+            allowNull:true,
+        },
         is_self_booked:{
             type:DataTypes.STRING,
-            allowNull:false,
+            allowNull:true,
         },
         reference:{
             type:DataTypes.STRING,
-            allowNull:false,
+            allowNull:true,
         },
         confirm_status:{
             type:DataTypes.STRING,
-            allowNull:false,
+            allowNull:true,
         },
     });
 
