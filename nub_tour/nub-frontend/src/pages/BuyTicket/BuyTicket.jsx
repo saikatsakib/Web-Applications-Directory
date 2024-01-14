@@ -61,6 +61,23 @@ const BuyTicket = () => {
   const [bookedSeatsInfo, setbookedSeatsInfo] = useState([]);
 
 
+  //get bus table info
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://127.0.01:8000/api/buses/get');
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log("DONE");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
 
   // let seatNames = [
   //   { seat_no: "A1", status: 0, gender: "" }, { seat_no: "A2", status: 0, gender: "" }, "", "", { seat_no: "A3", status: 0, gender: "" }, { seat_no: "A4", status: 0, gender: "" },
@@ -177,20 +194,7 @@ const BuyTicket = () => {
 
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://api.example.com/data');
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        console.log("DONE");
-      }
-    };
 
-    fetchData();
-  }, []);
 
 
 
