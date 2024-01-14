@@ -1,114 +1,104 @@
-
-import Box from '@mui/material/Box';
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
+import { Button } from "@mui/material";
+import './Home.scss';
 
 
-const Home = () => {
+const Home = ({data, seats}) => {
+
+  // const data = [
+  //   {name:"Sakib"},
+  //   {name:"Roni"},
+  //   {name:"Rifat"},
+  // ];
+
   return (
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <FormControl sx={{ minWidth: 100 }}>
-          <TextField
-            id="fullWidth"
-            label="Full Name"
-          helperText="Enter Your Full Name"
-          />
-        </FormControl>
-
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            label="Category"
-            sx={{ minWidth: '150px' }}
-          >
-            <MenuItem value="Student">Student</MenuItem>
-            <MenuItem value="Faculty">Faculty</MenuItem>
-            <MenuItem value="Gurdian">Gurdian</MenuItem>
-          </Select>
-          <FormHelperText>Select your category</FormHelperText>
-        </FormControl>
-
-        <TextField
-          id="outlined-error-helper-text"
-          label="NUB ID"
-          helperText="Enter Your NUB ID"
-        />
-
+    <div className='container home-container'>
+      <h5 className='mt-5 py-3'>Billing Information</h5>
+      <div className="total_cost">
+        <span className="d-block">Seat No. - </span>
+        <span className="d-block">Ticket Quantity - </span>
+        <h3 className="mt-2">Total Amount: <span></span></h3>
       </div>
+      <div className='p-2'>
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div>
+          <FormControl sx={{ minWidth: 200, mt:1 }}>
+                <InputLabel id="demo-simple-select-helper-label">Name</InputLabel>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  label="Names"
+                  sx={{ minWidth: '220px' }}
+                >
 
-      <div>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-helper-label1">Gender</InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label1"
-            id="demo-simple-select-helper"
-            label="Gender"
-            sx={{ minWidth: '150px' }}
-          >
-            <MenuItem value="Male">Male</MenuItem>
-            <MenuItem value="Female">Female</MenuItem>
-          </Select>
-          <FormHelperText>Select Gender</FormHelperText>
-        </FormControl>
-        <TextField
-          id="outlined-error-helper-text1"
-          label="Contact Number"
-          helperText="Contact Info"
-        />
+                  {
+                    data.map((val,i)=>{
+                      return(
+                      <MenuItem key={i} value={val.name}>{val.name}</MenuItem>
+                      )
+                    })
+                  }
+
+                </Select>
+              </FormControl>
+
+            <TextField
+              id="outlined-error-helper-text1"
+              label="Contact Number"
+            />
 
 
-        <TextField
-          id="outlined-error-helper-text1"
-          label="Ticket Quantity"
-          helperText="No. of Tickets"
-          value={2}
-        />
+        
 
+          </div>
+
+
+
+          <div></div>
+
+          <div>
+            <FormControl sx={{ minWidth: 200, mt:1 }}>
+              <InputLabel id="demo-simple-select-helper-label2">Payment</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label2"
+                id="demo-simple-select-helper"
+                label="Gender"
+                sx={{ minWidth: '220px' }}
+              >
+                <MenuItem value="Bkash">Bkash</MenuItem>
+                <MenuItem value="Nagad">Nagad</MenuItem>
+                <MenuItem value="Rocket">Rocket</MenuItem>
+              </Select>
+            
+            </FormControl>
+            <TextField
+              id="outlined-error-helper-text1"
+              label="Transaction ID"
+             
+            />
+
+          </div>
+
+
+
+
+        </Box>
+        <Button className="mt-3" variant="contained">Confirm Ticket</Button>
       </div>
-
-      <div></div>
-
-      <div>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-helper-label2">Payment</InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label2"
-            id="demo-simple-select-helper"
-            label="Gender"
-            sx={{ minWidth: '150px' }}
-          >
-            <MenuItem value="Bkash">Bkash</MenuItem>
-            <MenuItem value="Nagad">Nagad</MenuItem>
-            <MenuItem value="Rocket">Rocket</MenuItem>
-          </Select>
-          <FormHelperText>Select Payment Method</FormHelperText>
-        </FormControl>
-        <TextField
-          id="outlined-error-helper-text1"
-          label="Transaction ID"
-          helperText="Transaction No."
-        />
-
-      </div>
-
-
-
-
-    </Box>
+    </div>
   )
 }
 
