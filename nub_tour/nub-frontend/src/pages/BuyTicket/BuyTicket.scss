@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.ticket_container{
+    display: flex;
+    transform: scale(0.8);
+    border-radius: 5px;
+    background-color: white;
+}
+
+.bus_container{
+    width: 50%;
+    padding: 20px 30px;
+    
+}
+.wrapper-right{
+    background-color: white;
+    margin-top: 70px;
+    padding: 40px 30px;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.right-container{
+    width: 40%;
+
+}
+.right-container .info{
+    // margin-top: 140px;
+}
+
+
+.bus_layout{
+    width: 50%;
+    margin: 10px auto;
+    background-color: rgb(241, 240, 240);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.front_layout{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.seat{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.seat span{
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.seat_layout{
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    
+}
