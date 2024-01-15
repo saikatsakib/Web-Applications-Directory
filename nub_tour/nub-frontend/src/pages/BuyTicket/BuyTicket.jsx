@@ -15,6 +15,7 @@ import { v4 as uuid } from "uuid";
 import banner2 from './../../assets/images/banner2.png';
 import axios from "axios";
 import Ticket from './../Ticket/Ticket';
+import { motion } from 'framer-motion';
 
 
 const BuyTicket = () => {
@@ -218,7 +219,7 @@ const BuyTicket = () => {
 
   }, [selectedBus]);
 
- 
+
 
   //get Seat Data
   useEffect(() => {
@@ -279,14 +280,16 @@ const BuyTicket = () => {
 
 
   const handleReservation = () => {
-    confirmReservationData(reservationInfo)
+    confirmReservationData(reservationInfo);
+    setConfirmMsg(true);
     console.log(reservationInfo);
   }
 
 
-  if(!confirmMsg){
+  if (confirmMsg) {
     return (
-      <Ticket />
+      <Ticket name={reservationInfo.name} seat={selectedSeats} reference={reservationInfo.reference} />
+      // <Ticket name="Sakib" seat={["A1", "B4"]} reference="45GH7O4" />
     )
   }
 
@@ -295,15 +298,34 @@ const BuyTicket = () => {
     <>
 
 
-      <div className='mx-auto' style={{ width: '80%' }}>
+      <motion.div
+        initial={{ opacity: 0, x: 0, scale: 0.9 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        exit={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className='mx-auto' style={{ width: '80%' }}>
+
         <img src={banner2} alt="" className='img-fluid' />
-      </div>
-      <h4 className='text-center p-3 pb-1 caption-tour'>NUB CSE Annual Tour E-Ticket Booking System</h4>
+      </motion.div>
+      <motion.h4
+        initial={{ opacity: 0, x: 0, y: 10 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        exit={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className='text-center p-3 pb-1 caption-tour'>
+        NUB CSE Annual Tour E-Ticket Booking System</motion.h4>
+
+
       <div className='ticket_container'>
 
         {isVisibleRightContiner &&
 
-          <div className="bus_container">
+          <motion.div
+            initial={{ opacity: 0, x: 0, y: -10 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            exit={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bus_container">
 
             <div className="bus_selection text-center d-flex justify-content-center">
               <FormControl sx={{ width: 150, mx: 'auto', backgroundColor: 'white' }}>
@@ -331,7 +353,13 @@ const BuyTicket = () => {
 
             {isVisivleSeatLayout &&
 
-              <div className="bus_layout">
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+
+                className="bus_layout">
                 <div className="front_layout">
                   {/* <SensorDoorIcon sx={{fontSize:40, color:'#535c68', cursor:'pointer'}} /> */}
                   <div className="door">
@@ -384,19 +412,26 @@ const BuyTicket = () => {
                   })}
 
                 </div>
-              </div>
+              </motion.div>
             }
 
 
-          </div>
+          </motion.div>
         }
 
         {isVisibleRightContiner &&
           (selectedSeats.length != 0) &&
 
           <div className="right-container">
+
+
             <div className="wrapper-right">
-              <div className="info">
+              <motion.div
+                initial={{ opacity: 0, x: 0, y: 5 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="info">
                 <h4>Selected Seats:</h4>
                 {selectedSeats.map((val, i) => {
                   return (
@@ -404,7 +439,7 @@ const BuyTicket = () => {
                   );
                 })
                 }
-              </div>
+              </motion.div>
               {/* {(selectedSeats.length != 0) && */}
               <div className="booking_form mt-3">
 
@@ -414,7 +449,7 @@ const BuyTicket = () => {
 
                 <input id='seatNo' type="text" value={selectedSeats[seatInfoTrack]} hidden />
 
-                <FormControl sx={{ minWidth: 100, m:2 }}>
+                <FormControl sx={{ minWidth: 100, m: 2 }}>
                   <TextField
                     id="fullWidth"
                     label="Passenger Name"
@@ -423,7 +458,7 @@ const BuyTicket = () => {
                   />
                 </FormControl>
 
-                <FormControl sx={{ minWidth: 120, m: 2}}>
+                <FormControl sx={{ minWidth: 120, m: 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
@@ -477,7 +512,7 @@ const BuyTicket = () => {
 
 
                 {isStudent &&
-                  <FormControl sx={{ minWidth: 100, m:2 }}>
+                  <FormControl sx={{ minWidth: 100, m: 2 }}>
                     <TextField
                       id="fullWidth"
                       label="nub_id"
@@ -488,16 +523,30 @@ const BuyTicket = () => {
 
                 }
 
+                {
+                  (bookedSeatInfo.gender == "") &&
+                  <div className="booking_info mt-3">
+                    <Button sx={{ m: 2 }} onClick={handleNextStep} variant='contained' disabled>Next Step</Button>
+                  </div>
 
-                <div className="booking_info mt-3">
-                  <Button sx={{m:2}} onClick={handleNextStep} variant='contained'>Next Step</Button>
-                </div>
+                }
+                {
+                  (bookedSeatInfo.gender != "") &&
+                  <div className="booking_info mt-3">
+                    <Button sx={{ m: 2 }} onClick={handleNextStep} variant='contained'>Next Step</Button>
+                  </div>
+
+                }
+
 
 
               </div>
 
 
             </div>
+
+
+
           </div>
         }
         {
@@ -516,15 +565,15 @@ const BuyTicket = () => {
               </span>
               <span className="d-block fw-bold">Ticket Quantity - <span className="text-success">{selectedSeats.length}</span></span>
               <span className="d-block fw-bold">Bus Name - <span className="text-danger">{selectedBus}</span></span>
-        
+
               <br />
               <h4 className="mt-2 t_amount">Total Amount: <span className="text-warning fw-bolder">{reservationInfo.amount}.00 </span>BDT</h4>
               <h4 className="mt-2 t_amount">Total Amount (Bkash):  <span className="text-warning fw-bolder">{reservationInfo.bkash_amount}.00 </span>BDT</h4>
-          
+
               <br />
               <span className="text-primary">You can buy tickets with booking amount.</span>
               <h4 className="mt-2 t_amount">Booking Amount:  <span className="text-warning fw-bolder">{reservationInfo.booking_amount}.00 </span>BDT</h4>
-            <br />
+              <br />
             </div>
 
             <div className='p-2'>
@@ -537,7 +586,7 @@ const BuyTicket = () => {
                 autoComplete="off"
               >
                 <div>
-                  <FormControl sx={{ minWidth: 200, mt: 1, ml:1 }}>
+                  <FormControl sx={{ minWidth: 200, mt: 1, ml: 1 }}>
                     <InputLabel id="demo-simple-select-helper-label">Name</InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label"
@@ -577,7 +626,7 @@ const BuyTicket = () => {
                 <div></div>
 
                 <div>
-                  <FormControl sx={{ minWidth: 200, mt: 1, ml:1 }}>
+                  <FormControl sx={{ minWidth: 200, mt: 1, ml: 1 }}>
                     <InputLabel id="demo-simple-select-helper-label2">Payment</InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label2"
@@ -598,7 +647,7 @@ const BuyTicket = () => {
                     label="Transaction ID"
                     value={reservationInfo.transaction_id}
                     onChange={(e) => setReservationInfo((prev) => ({ ...prev, transaction_id: e.target.value }))}
-                    
+
 
                   />
 
@@ -609,7 +658,16 @@ const BuyTicket = () => {
 
               </Box>
 
-              <Button sx={{m:1,mt:2}} onClick={handleReservation} className="mt-3" variant="contained">Confirm Ticket</Button>
+              {
+                (reservationInfo.transaction_id=="") &&
+                <Button sx={{ m: 1, mt: 2 }} onClick={handleReservation} className="mt-3" variant="contained" disabled>Confirm Ticket</Button>
+              }
+              {
+                (reservationInfo.transaction_id!="") &&
+                <Button sx={{ m: 1, mt: 2 }} onClick={handleReservation} className="mt-3" variant="contained">Confirm Ticket</Button>
+              }
+
+              
 
 
 
@@ -622,9 +680,13 @@ const BuyTicket = () => {
 
 
       </div>
+
+
+
       <center className="py-2 d-block">
-        <code className="d-block text-dark">&copy;copyright nubcc_offficial.</code>
-        <code className="d-block text-dark">All rights reserved.</code>
+        <span className="d-block text-dark c">Developed By</span>
+        <span className="d-block text-primary c">Sakibur Rahman Saikat & Ebrahim Khalil Roni</span>
+        <span className="d-block text-dark c">&copy;copyright nubcc_offficial 2024. All rights reserved.</span>
       </center>
     </>
   )

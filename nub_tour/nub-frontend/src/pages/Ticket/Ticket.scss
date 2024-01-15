@@ -4,7 +4,13 @@
     // background: linear-gradient(to right,#FF416C,#FF4B2B);
     // color: white;
 }
-
+.cap-1{
+    font-size: 20px;
+    margin-top: 50px;
+}
+.cap-2{
+    font-size: 14px;
+}
 .ticket-box{
     width: 40%;
     margin: 40px auto;
@@ -21,8 +27,8 @@
 .ticket-box h3{
     // font-family: "Lobster", sans-serif;
     font-family: "Rubik Burned", system-ui;
-    // color: rgb(26, 109, 204);
-    color: black;
+    color: rgb(26, 109, 204);
+    // color: black;
     font-weight: 400;
     font-style: normal;
     font-size: 26px;
@@ -43,6 +49,10 @@
 
 .text-custom{
     color: #0854ac;
+}
+
+.c{
+    font-size: 12px;
 }
 
 .bar{

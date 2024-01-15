@@ -70,7 +70,9 @@
     grid-template-columns: auto auto auto auto;
     
 }
-
+.c{
+    font-size: 12px;
+}
 @media only screen and (min-width: 240px) and (max-width: 720px) {
     .home-container{
         width: 90%;
