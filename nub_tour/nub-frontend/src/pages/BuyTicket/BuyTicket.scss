@@ -13,6 +13,7 @@
     background-color: white;
     padding: 50px 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 0px;
 }
 
 .bus_container{
@@ -22,7 +23,6 @@
 }
 .wrapper-right{
     background-color: white;
-    margin-top: 70px;
     padding: 40px 30px;
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -67,13 +67,18 @@
 .seat_layout{
     margin-top: 50px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto;
     
 }
 
-@media only screen and (min-width: 240px) and (max-width: 600px) {
+@media only screen and (min-width: 240px) and (max-width: 720px) {
     .home-container{
         width: 90%;
+        margin-top: -100px;
+        padding-top: 40px;
+    }
+    .caption-tour{
+        font-size: 13px;
     }
     
     .ticket_container{
@@ -87,9 +92,17 @@
         
     }
 
+    .t_amount{
+        font-size: 18px;
+    }
+
     .right-container{
         width: 100%;
     
+    }
+
+    .wrapper-right{
+        transform: scale(0.9);
     }
     
     .bus_layout{

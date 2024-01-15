@@ -14,13 +14,15 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { v4 as uuid } from "uuid";
 import banner2 from './../../assets/images/banner2.png';
 import axios from "axios";
-import { json } from "react-router-dom";
+import Ticket from './../Ticket/Ticket';
 
 
 const BuyTicket = () => {
 
   // New unique id
   const unique_id = uuid();
+
+  const [confirmMsg, setConfirmMsg] = useState(false);
 
   const [refId, setRefId] = useState(unique_id.slice(0, 10));
 
@@ -70,16 +72,7 @@ const BuyTicket = () => {
         const response = await axios.get('http://127.0.01:8000/api/buses/get');
         setBusData(response.data);
         console.log(busData);
-        // console.log(response.data[0].id)
-        // console.log(typeof(response.data))
 
-        // busData.forEach((value, index) => {
-        //   console.log(value.capacity, index)
-        //   if (value.bus_name == selectedBus) {
-        //     setBusCapacity(value.capacity);
-        //     console.log(value.capacity)
-        //   }
-        // })
       } catch (error) {
         console.log(error);
       } finally {
@@ -108,17 +101,17 @@ const BuyTicket = () => {
   // ];
 
   const [seatNames, setseatNames] = useState([
-    { seat_no: "A1", status: 0, gender: "" }, { seat_no: "A2", status: 0, gender: "" }, "", "", { seat_no: "A3", status: 0, gender: "" }, { seat_no: "A4", status: 0, gender: "" },
-    { seat_no: "B1", status: 0, gender: "" }, { seat_no: "B2", status: 0, gender: "" }, "", "", { seat_no: "B3", status: 0, gender: "" }, { seat_no: "B4", status: 0, gender: "" },
-    { seat_no: "C1", status: 0, gender: "" }, { seat_no: "C2", status: 0, gender: "" }, "", "", { seat_no: "C3", status: 0, gender: "" }, { seat_no: "C4", status: 0, gender: "" },
-    { seat_no: "D1", status: 0, gender: "" }, { seat_no: "D2", status: 0, gender: "" }, "", "", { seat_no: "D3", status: 0, gender: "" }, { seat_no: "D4", status: 0, gender: "" },
-    { seat_no: "E1", status: 0, gender: "" }, { seat_no: "E2", status: 0, gender: "" }, "", "", { seat_no: "E3", status: 0, gender: "" }, { seat_no: "E4", status: 0, gender: "" },
-    { seat_no: "F1", status: 0, gender: "" }, { seat_no: "F2", status: 0, gender: "" }, "", "", { seat_no: "F3", status: 0, gender: "" }, { seat_no: "F4", status: 0, gender: "" },
-    { seat_no: "G1", status: 0, gender: "" }, { seat_no: "G2", status: 0, gender: "" }, "", "", { seat_no: "G3", status: 0, gender: "" }, { seat_no: "G4", status: 0, gender: "" },
-    { seat_no: "H1", status: 0, gender: "" }, { seat_no: "H2", status: 0, gender: "" }, "", "", { seat_no: "H3", status: 0, gender: "" }, { seat_no: "H4", status: 0, gender: "" },
-    { seat_no: "I1", status: 0, gender: "" }, { seat_no: "I2", status: 0, gender: "" }, "", "", { seat_no: "I3", status: 0, gender: "" }, { seat_no: "I4", status: 0, gender: "" },
-    { seat_no: "J1", status: 0, gender: "" }, { seat_no: "J2", status: 0, gender: "" }, "", "", { seat_no: "J3", status: 0, gender: "" }, { seat_no: "J4", status: 0, gender: "" },
-    { seat_no: "K1", status: 0, gender: "" }, { seat_no: "K2", status: 0, gender: "" }, "", "", { seat_no: "K3", status: 0, gender: "" }, { seat_no: "K4", status: 0, gender: "" },
+    { seat_no: "A1", status: 0, gender: "" }, { seat_no: "A2", status: 0, gender: "" }, { seat_no: "A3", status: 0, gender: "" }, { seat_no: "A4", status: 0, gender: "" },
+    { seat_no: "B1", status: 0, gender: "" }, { seat_no: "B2", status: 0, gender: "" }, { seat_no: "B3", status: 0, gender: "" }, { seat_no: "B4", status: 0, gender: "" },
+    { seat_no: "C1", status: 0, gender: "" }, { seat_no: "C2", status: 0, gender: "" }, { seat_no: "C3", status: 0, gender: "" }, { seat_no: "C4", status: 0, gender: "" },
+    { seat_no: "D1", status: 0, gender: "" }, { seat_no: "D2", status: 0, gender: "" }, { seat_no: "D3", status: 0, gender: "" }, { seat_no: "D4", status: 0, gender: "" },
+    { seat_no: "E1", status: 0, gender: "" }, { seat_no: "E2", status: 0, gender: "" }, { seat_no: "E3", status: 0, gender: "" }, { seat_no: "E4", status: 0, gender: "" },
+    { seat_no: "F1", status: 0, gender: "" }, { seat_no: "F2", status: 0, gender: "" }, { seat_no: "F3", status: 0, gender: "" }, { seat_no: "F4", status: 0, gender: "" },
+    { seat_no: "G1", status: 0, gender: "" }, { seat_no: "G2", status: 0, gender: "" }, { seat_no: "G3", status: 0, gender: "" }, { seat_no: "G4", status: 0, gender: "" },
+    { seat_no: "H1", status: 0, gender: "" }, { seat_no: "H2", status: 0, gender: "" }, { seat_no: "H3", status: 0, gender: "" }, { seat_no: "H4", status: 0, gender: "" },
+    { seat_no: "I1", status: 0, gender: "" }, { seat_no: "I2", status: 0, gender: "" }, { seat_no: "I3", status: 0, gender: "" }, { seat_no: "I4", status: 0, gender: "" },
+    { seat_no: "J1", status: 0, gender: "" }, { seat_no: "J2", status: 0, gender: "" }, { seat_no: "J3", status: 0, gender: "" }, { seat_no: "J4", status: 0, gender: "" },
+    { seat_no: "K1", status: 0, gender: "" }, { seat_no: "K2", status: 0, gender: "" }, { seat_no: "K3", status: 0, gender: "" }, { seat_no: "K4", status: 0, gender: "" },
 
   ]);
 
@@ -208,9 +201,10 @@ const BuyTicket = () => {
     if (selectedBus != "") {
       busData.forEach((value) => {
         if (value.bus_name == selectedBus) {
-          let temp = parseInt(value.capacity) / 4;
-          let temp2 = (temp * 2) + parseInt(value.capacity);
-          setBusCapacity(temp2)
+          // let temp = parseInt(value.capacity) / 4;
+          // let temp2 = (temp * 2) + parseInt(value.capacity);
+          // setBusCapacity(temp2);
+          setBusCapacity(value.capacity);
         }
       })
       setIsVisivleSeatLayout(true);
@@ -218,62 +212,15 @@ const BuyTicket = () => {
       setIsVisivleSeatLayout(false);
     }
 
-    // const db_data = [
-    //   { seat_no: "A4", gender: "Female", },
-    //   { seat_no: "C3", gender: "Male", },
-    //   { seat_no: "D1", gender: "Female", },
-    //   { seat_no: "F4", gender: "Male", }
-    // ];
-
-    // for (let x = 0; x < seatNames.length; x++) {
-    //   for (let y = 0; y < db_data.length; y++) {
-    //     if (seatNames[x].seat_no == db_data[y].seat_no) {
-    //       console.log("Hi");
-    //       seatNames[x].status = 1;
-    //       seatNames[x].gender = db_data[y].gender;
-    //       break;
-
-    //     }
-    //   }
-    // }
-
     setSelectedBus(selectedBus);
     console.log(selectedBus);
     setbookedSeatInfo((prev) => ({ ...prev, bus_name: selectedBus }));
 
   }, [selectedBus]);
 
-  const clearSeat = () => {
-    // setseatNames([
-    //   { seat_no: "A1", status: 0, gender: "" }, { seat_no: "A2", status: 0, gender: "" }, "", "", { seat_no: "A3", status: 0, gender: "" }, { seat_no: "A4", status: 0, gender: "" },
-    //   { seat_no: "B1", status: 0, gender: "" }, { seat_no: "B2", status: 0, gender: "" }, "", "", { seat_no: "B3", status: 0, gender: "" }, { seat_no: "B4", status: 0, gender: "" },
-    //   { seat_no: "C1", status: 0, gender: "" }, { seat_no: "C2", status: 0, gender: "" }, "", "", { seat_no: "C3", status: 0, gender: "" }, { seat_no: "C4", status: 0, gender: "" },
-    //   { seat_no: "D1", status: 0, gender: "" }, { seat_no: "D2", status: 0, gender: "" }, "", "", { seat_no: "D3", status: 0, gender: "" }, { seat_no: "D4", status: 0, gender: "" },
-    //   { seat_no: "E1", status: 0, gender: "" }, { seat_no: "E2", status: 0, gender: "" }, "", "", { seat_no: "E3", status: 0, gender: "" }, { seat_no: "E4", status: 0, gender: "" },
-    //   { seat_no: "F1", status: 0, gender: "" }, { seat_no: "F2", status: 0, gender: "" }, "", "", { seat_no: "F3", status: 0, gender: "" }, { seat_no: "F4", status: 0, gender: "" },
-    //   { seat_no: "G1", status: 0, gender: "" }, { seat_no: "G2", status: 0, gender: "" }, "", "", { seat_no: "G3", status: 0, gender: "" }, { seat_no: "G4", status: 0, gender: "" },
-    //   { seat_no: "H1", status: 0, gender: "" }, { seat_no: "H2", status: 0, gender: "" }, "", "", { seat_no: "H3", status: 0, gender: "" }, { seat_no: "H4", status: 0, gender: "" },
-    //   { seat_no: "I1", status: 0, gender: "" }, { seat_no: "I2", status: 0, gender: "" }, "", "", { seat_no: "I3", status: 0, gender: "" }, { seat_no: "I4", status: 0, gender: "" },
-    //   { seat_no: "J1", status: 0, gender: "" }, { seat_no: "J2", status: 0, gender: "" }, "", "", { seat_no: "J3", status: 0, gender: "" }, { seat_no: "J4", status: 0, gender: "" },
-    //   { seat_no: "K1", status: 0, gender: "" }, { seat_no: "K2", status: 0, gender: "" }, "", "", { seat_no: "K3", status: 0, gender: "" }, { seat_no: "K4", status: 0, gender: "" },
+ 
 
-    // ]);
-    seatNames([
-      { seat_no: "A1", status: 0, gender: "" }, { seat_no: "A2", status: 0, gender: "" }, "", "", { seat_no: "A3", status: 0, gender: "" }, { seat_no: "A4", status: 0, gender: "" },
-      { seat_no: "B1", status: 0, gender: "" }, { seat_no: "B2", status: 0, gender: "" }, "", "", { seat_no: "B3", status: 0, gender: "" }, { seat_no: "B4", status: 0, gender: "" },
-      { seat_no: "C1", status: 0, gender: "" }, { seat_no: "C2", status: 0, gender: "" }, "", "", { seat_no: "C3", status: 0, gender: "" }, { seat_no: "C4", status: 0, gender: "" },
-      { seat_no: "D1", status: 0, gender: "" }, { seat_no: "D2", status: 0, gender: "" }, "", "", { seat_no: "D3", status: 0, gender: "" }, { seat_no: "D4", status: 0, gender: "" },
-      { seat_no: "E1", status: 0, gender: "" }, { seat_no: "E2", status: 0, gender: "" }, "", "", { seat_no: "E3", status: 0, gender: "" }, { seat_no: "E4", status: 0, gender: "" },
-      { seat_no: "F1", status: 0, gender: "" }, { seat_no: "F2", status: 0, gender: "" }, "", "", { seat_no: "F3", status: 0, gender: "" }, { seat_no: "F4", status: 0, gender: "" },
-      { seat_no: "G1", status: 0, gender: "" }, { seat_no: "G2", status: 0, gender: "" }, "", "", { seat_no: "G3", status: 0, gender: "" }, { seat_no: "G4", status: 0, gender: "" },
-      { seat_no: "H1", status: 0, gender: "" }, { seat_no: "H2", status: 0, gender: "" }, "", "", { seat_no: "H3", status: 0, gender: "" }, { seat_no: "H4", status: 0, gender: "" },
-      { seat_no: "I1", status: 0, gender: "" }, { seat_no: "I2", status: 0, gender: "" }, "", "", { seat_no: "I3", status: 0, gender: "" }, { seat_no: "I4", status: 0, gender: "" },
-      { seat_no: "J1", status: 0, gender: "" }, { seat_no: "J2", status: 0, gender: "" }, "", "", { seat_no: "J3", status: 0, gender: "" }, { seat_no: "J4", status: 0, gender: "" },
-      { seat_no: "K1", status: 0, gender: "" }, { seat_no: "K2", status: 0, gender: "" }, "", "", { seat_no: "K3", status: 0, gender: "" }, { seat_no: "K4", status: 0, gender: "" },
-
-    ])
-
-  }
+  //get Seat Data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -337,7 +284,11 @@ const BuyTicket = () => {
   }
 
 
-
+  if(!confirmMsg){
+    return (
+      <Ticket />
+    )
+  }
 
 
   return (
@@ -347,7 +298,7 @@ const BuyTicket = () => {
       <div className='mx-auto' style={{ width: '80%' }}>
         <img src={banner2} alt="" className='img-fluid' />
       </div>
-      <h4 className='text-center p-3 py-4 pb-1'>NUB CSE Annual Tour E-Ticket Booking System</h4>
+      <h4 className='text-center p-3 pb-1 caption-tour'>NUB CSE Annual Tour E-Ticket Booking System</h4>
       <div className='ticket_container'>
 
         {isVisibleRightContiner &&
@@ -463,7 +414,7 @@ const BuyTicket = () => {
 
                 <input id='seatNo' type="text" value={selectedSeats[seatInfoTrack]} hidden />
 
-                <FormControl sx={{ minWidth: 100 }}>
+                <FormControl sx={{ minWidth: 100, m:2 }}>
                   <TextField
                     id="fullWidth"
                     label="Passenger Name"
@@ -472,7 +423,7 @@ const BuyTicket = () => {
                   />
                 </FormControl>
 
-                <FormControl sx={{ minWidth: 120, ml: 2 }}>
+                <FormControl sx={{ minWidth: 120, m: 2}}>
                   <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
@@ -496,7 +447,7 @@ const BuyTicket = () => {
                 </FormControl>
 
 
-                <FormControl sx={{ minWidth: 120, mt: 2 }}>
+                <FormControl sx={{ minWidth: 120, m: 2 }}>
                   <InputLabel id="demo-simple-select-helper-label1">Gender</InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label1"
@@ -526,7 +477,7 @@ const BuyTicket = () => {
 
 
                 {isStudent &&
-                  <FormControl sx={{ minWidth: 100, mt: 2, ml: 2 }}>
+                  <FormControl sx={{ minWidth: 100, m:2 }}>
                     <TextField
                       id="fullWidth"
                       label="nub_id"
@@ -539,7 +490,7 @@ const BuyTicket = () => {
 
 
                 <div className="booking_info mt-3">
-                  <Button onClick={handleNextStep} variant='contained'>Next Step</Button>
+                  <Button sx={{m:2}} onClick={handleNextStep} variant='contained'>Next Step</Button>
                 </div>
 
 
@@ -565,10 +516,15 @@ const BuyTicket = () => {
               </span>
               <span className="d-block fw-bold">Ticket Quantity - <span className="text-success">{selectedSeats.length}</span></span>
               <span className="d-block fw-bold">Bus Name - <span className="text-danger">{selectedBus}</span></span>
-              <h4 className="mt-2">Total Amount: {reservationInfo.amount}.00 BDT<span></span></h4>
-              <h4 className="mt-2">Total Amount (Bkash): {reservationInfo.bkash_amount}.00 BDT<span></span></h4>
-              <span className="text-danger">You can buy tickets with booking amount.</span>
-              <h4 className="mt-2">Booking Amount (Bkash): {reservationInfo.booking_amount}.00 BDT<span></span></h4>
+        
+              <br />
+              <h4 className="mt-2 t_amount">Total Amount: <span className="text-warning fw-bolder">{reservationInfo.amount}.00 </span>BDT</h4>
+              <h4 className="mt-2 t_amount">Total Amount (Bkash):  <span className="text-warning fw-bolder">{reservationInfo.bkash_amount}.00 </span>BDT</h4>
+          
+              <br />
+              <span className="text-primary">You can buy tickets with booking amount.</span>
+              <h4 className="mt-2 t_amount">Booking Amount:  <span className="text-warning fw-bolder">{reservationInfo.booking_amount}.00 </span>BDT</h4>
+            <br />
             </div>
 
             <div className='p-2'>
@@ -581,7 +537,7 @@ const BuyTicket = () => {
                 autoComplete="off"
               >
                 <div>
-                  <FormControl sx={{ minWidth: 200, mt: 1 }}>
+                  <FormControl sx={{ minWidth: 200, mt: 1, ml:1 }}>
                     <InputLabel id="demo-simple-select-helper-label">Name</InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label"
@@ -621,26 +577,28 @@ const BuyTicket = () => {
                 <div></div>
 
                 <div>
-                  <FormControl sx={{ minWidth: 200, mt: 1 }}>
+                  <FormControl sx={{ minWidth: 200, mt: 1, ml:1 }}>
                     <InputLabel id="demo-simple-select-helper-label2">Payment</InputLabel>
                     <Select
                       labelId="demo-simple-select-helper-label2"
                       id="demo-simple-select-helper"
                       label="Gender"
                       sx={{ minWidth: '220px' }}
+                      // value={payment_by}
                       onChange={(e) => setReservationInfo((prev) => ({ ...prev, payment_by: e.target.value }))}
                     >
                       <MenuItem value="Bkash">Bkash</MenuItem>
                       <MenuItem value="Nagad">Nagad</MenuItem>
                       <MenuItem value="Rocket">Rocket</MenuItem>
                     </Select>
-
+                    <FormHelperText>Payment Method</FormHelperText>
                   </FormControl>
                   <TextField
                     id="outlined-error-helper-text1"
                     label="Transaction ID"
                     value={reservationInfo.transaction_id}
                     onChange={(e) => setReservationInfo((prev) => ({ ...prev, transaction_id: e.target.value }))}
+                    
 
                   />
 
@@ -651,7 +609,7 @@ const BuyTicket = () => {
 
               </Box>
 
-              <Button onClick={handleReservation} className="mt-3" variant="contained">Confirm Ticket</Button>
+              <Button sx={{m:1,mt:2}} onClick={handleReservation} className="mt-3" variant="contained">Confirm Ticket</Button>
 
 
 
@@ -664,7 +622,10 @@ const BuyTicket = () => {
 
 
       </div>
-
+      <center className="py-2 d-block">
+        <code className="d-block text-dark">&copy;copyright nubcc_offficial.</code>
+        <code className="d-block text-dark">All rights reserved.</code>
+      </center>
     </>
   )
 }
