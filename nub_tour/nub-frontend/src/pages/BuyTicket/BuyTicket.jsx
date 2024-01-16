@@ -567,7 +567,7 @@ const BuyTicket = () => {
               <span className="d-block fw-bold">Bus Name - <span className="text-danger">{selectedBus}</span></span>
 
               <br />
-              <h4 className="mt-2 t_amount">Total Amount: <span className="text-warning fw-bolder">{reservationInfo.amount}.00 </span>BDT</h4>
+              <h4 className="mt-2 t_amount">Amount: <span className="text-warning fw-bolder">{reservationInfo.amount}.00 </span>BDT</h4>
               <h4 className="mt-2 t_amount">Total Amount (Bkash):  <span className="text-warning fw-bolder">{reservationInfo.bkash_amount}.00 </span>BDT</h4>
 
               <br />
@@ -642,6 +642,14 @@ const BuyTicket = () => {
                     </Select>
                     <FormHelperText>Payment Method</FormHelperText>
                   </FormControl>
+                  <TextField
+                    id="outlined-error-helper-text1"
+                    label="Amount"
+                    value={reservationInfo.amount}
+                    onChange={(e) => setReservationInfo((prev) => ({ ...prev, amount: e.target.value }))}
+
+
+                  />
                   <TextField
                     id="outlined-error-helper-text1"
                     label="Transaction ID"
