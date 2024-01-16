@@ -1,24 +1,26 @@
 import {
   createBrowserRouter,
   RouterProvider,
+
 } from "react-router-dom";
-import Home from './pages/Home/Home';
-import Register from './pages/Register/Register';
+import BuyTicket from "./pages/BuyTicket/BuyTicket";
+import Ticket from "./pages/Ticket/Ticket";
 
 const router = createBrowserRouter([
+
   {
     path: "/",
-    element: <Home />,
+    element:<BuyTicket />,
   },
   {
-    path: "/register",
-    element: <Register />,
+    path: "/ticket",
+    element:<Ticket />,
   },
 ]);
 
 
 function App() {
-
+  
 
   return (
     <RouterProvider router={router} />

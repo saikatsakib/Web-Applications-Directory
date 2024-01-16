@@ -14,6 +14,10 @@ app.use('/bus',BusRouter);
 app.use('/reservation',ReservationRouter);
 
 
+app.get('/',(req,res)=>{
+    res.json("Hi From Backend...");
+});
+
 db.sequelize.sync().then(() => {
 
     app.listen(PORT, (err)=>{
